@@ -1,0 +1,22 @@
+<template>
+  <lightning-input
+    label="件名"
+    value={filter1}
+    onchange={onChangeFilter}
+    class="slds-size_5-of-12 slds-m-bottom_small"
+    placeholder="検索したい文字列"
+  ></lightning-input>
+
+  <lightning-datatable
+    class="slds-max-medium-table_stacked"
+    key-field="id"
+    columns={columns}
+    data={filteredData}
+    hide-checkbox-column
+    default-sort-direction={defaultSortDirection}
+    sorted-direction={sortDirection}
+    sorted-by={sortedBy}
+    onsort={onHandleSort}
+  >
+  </lightning-datatable>
+</template>
