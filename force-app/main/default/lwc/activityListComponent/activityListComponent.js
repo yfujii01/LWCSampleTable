@@ -1,5 +1,6 @@
 import { api, LightningElement } from "lwc";
 import selectList from "@salesforce/apex/ActivityListController.selectList";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class ActivityListComponent extends LightningElement {
     /** テーブル表示データ */
@@ -135,6 +136,14 @@ export default class ActivityListComponent extends LightningElement {
                         error.body.message + "\n" + error.body.stackTrace
                     );
                 }
+            
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "エラー",
+                        message: `${error.body.message} \n ${error.body.stackTrace}`,
+                        variant: "error"
+                    })
+                );
             });
     }
 }
