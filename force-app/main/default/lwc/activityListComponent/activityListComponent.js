@@ -83,7 +83,19 @@ export default class ActivityListComponent extends LightningElement {
     /** フィルター操作 */
     onChangeFilter(event) {
         this.filteredData = this.data.filter((d) => {
-            return d.Subject.includes(event.target.value);
+            for (const prop in d) {
+                if (Object.prototype.hasOwnProperty.call(d, prop)) {
+                    try {
+                        const bool = d[prop].includes(event.target.value);
+                        if (bool) {
+                            return true;
+                        }
+                    } catch (e) {
+                        return false;
+                    }
+                }
+            }
+            return false;
         });
     }
 
